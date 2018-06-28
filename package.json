@@ -1,0 +1,44 @@
+{
+  "name": "learn_react_001",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"webpack\" \"nodemon ./src/server/app.js\"",
+    "test": "jest --watch",
+    "dev": "babel ./src/front/app.js --out-file=public/app.js --presets=env,react",
+    "dev-w": "babel ./src/front/app2.js --out-file=public/app2.js --presets=env,react --watch",
+    "playground": "babel ./src/front/playground/redux-101.js --out-file=public/redux-101.js --presets=env,react --watch",
+    "build": "webpack",
+    "build-w": "webpack --watch",
+    "dev-server": "webpack-dev-server",
+    "custom-server": "nodemon ./src/server/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-modal": "^3.4.5",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "uuid": "^3.2.1",
+    "webpack": "^4.12.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "nodemon": "^1.17.5",
+    "webpack-cli": "^3.0.8",
+    "css-loader": "^0.28.11",
+    "node-sass": "^4.9.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0"
+  }
+}

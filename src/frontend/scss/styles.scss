@@ -1,0 +1,72 @@
+$base-gap: 12px;
+
+* {
+  box-sizing:border-box;
+}
+
+html,body,#app {
+  height:100%;
+}
+
+body {
+  background: #f3f3f3;
+}
+
+h1,h2,h3,h4{
+  display: block;
+}
+
+h1 {
+  font-size: $base-gap*3;
+}
+
+form {
+  //padding: 20px;
+}
+
+label {
+  display: block;
+}
+
+fieldset {
+  border:1px solid blue;
+  margin-bottom:$base-gap;
+  padding:$base-gap;
+}
+
+.page-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-footer,
+.app-header  {
+  text-align: center;
+  background: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height:200px;
+}
+
+.component {
+  padding:$base-gap;
+  max-width:80%;
+  background: #fff;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.help-text {
+  color: #ccc;
+}
+
+.form-control {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+  padding: 3px;
+  border:1px solid;
+}
