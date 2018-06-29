@@ -2,6 +2,7 @@
   "name": "learn_react_001",
   "version": "1.0.0",
   "scripts": {
+    "start": "concurrently \"npm run dev-server\" \"npm run custom-server\"",
     "test": "jest --watch",
     "build": "webpack",
     "build-w": "webpack --watch",
