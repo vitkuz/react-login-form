@@ -1,1 +1,1 @@
-this folder for fun&experiments
+i've created this folder for fun & quick experiments

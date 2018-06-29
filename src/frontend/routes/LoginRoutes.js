@@ -18,19 +18,22 @@ class AppRoutes extends Component {
   };
   
   render() {
-
+    
+    // const classes = `component ${this.props.match.path.split('/').join(' ')}`;
+    
     return (
         <BrowserRouter>
           <div className="page-wrapper">
             <AppHeader title="Try to login" subtitle="Test work for a project"/>
-            <Switch>
-              <Route path="/" component={LoginForm} exact={true}/>
-              <Route path="/user/login" component={(props) => <LoginForm {...props} title="Login form"/>} />
-              <Route path="/user/register" component={(props) => <RegisterForm {...props} title="Register form"/>} />
-              <Route path="/user/password" component={(props) => <LoginForgetPassword {...props} title="Password form"/>} />
-            </Switch>
-            <LoginFormFooter />
-            <hr/>
+            <main className={`component`}>
+              <Switch>
+                <Route path="/" component={(props) => <LoginForm {...props} title="Login form"/>} exact={true}/>
+                <Route path="/user/login" component={(props) => <LoginForm {...props} title="Login form"/>} />
+                <Route path="/user/register" component={(props) => <RegisterForm {...props} title="Register form"/>} />
+                <Route path="/user/password" component={(props) => <LoginForgetPassword {...props} title="Password form"/>} />
+              </Switch>
+              <LoginFormFooter />
+            </main>
             
             <AppFooter text="(c) Copy 2018"/>
           

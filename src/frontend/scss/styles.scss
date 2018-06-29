@@ -4,12 +4,37 @@ $base-gap: 12px;
   box-sizing:border-box;
 }
 
+button:focus,
+input:focus {
+  outline: 0;
+  border:2px solid red;
+}
+
 html,body,#app {
   height:100%;
 }
 
 body {
   background: #f3f3f3;
+}
+
+header,
+footer,
+main,
+section {
+  padding-top: 2*$base-gap;
+  padding-bottom: 2*$base-gap;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 h1,h2,h3,h4{
@@ -32,6 +57,15 @@ fieldset {
   border:1px solid blue;
   margin-bottom:$base-gap;
   padding:$base-gap;
+  position: relative;
+}
+
+.input-reset-link {
+  content: '*';
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  text-decoration: none;
 }
 
 .page-wrapper {
@@ -57,16 +91,62 @@ fieldset {
   margin: auto;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 0px 3px #ccc;
 }
 
 .help-text {
   color: #ccc;
+  margin:$base-gap / 2 0;
 }
 
 .form-control {
   width: 100%;
   border-radius: 4px;
   display: block;
-  padding: 3px;
+  padding: 7px;
   border:1px solid;
+}
+
+.component-title {
+  margin-bottom: 2*$base-gap;
+  padding-bottom: $base-gap / 4;
+  border-bottom: 2px solid #f3f3f3;
+}
+
+input:focus + [role="tooltip"] {
+  background: yellow;
+  color: #000;
+}
+
+[aria-invalid="true"] {
+  background: pink;
+}
+
+#status {
+  padding: 2*$base-gap;
+  margin-bottom:$base-gap;
+  background: #5B7751;
+  color: #fff;
+}
+
+.btn {
+  width: 100%;
+  display: block;
+  background: #000;
+  color: #fff;
+  border:0;
+  padding:$base-gap;
+  border-radius: 4px;
+}
+
+.form-pages {
+  display: flex;
+  padding:$base-gap;
+  text-align: center;
+  align-items:center;
+  justify-content:space-between;
+}
+
+a.active {
+  color: red;
 }
