@@ -6,8 +6,7 @@ $base-gap: 12px;
 
 button:focus,
 input:focus {
-  outline: 0;
-  border:2px solid red;
+  outline: 2px dotted blue;
 }
 
 html,body,#app {
@@ -54,7 +53,7 @@ label {
 }
 
 fieldset {
-  border:1px solid blue;
+  border:1px solid silver;
   margin-bottom:$base-gap;
   padding:$base-gap;
   position: relative;
@@ -86,12 +85,13 @@ fieldset {
 
 .component {
   padding:$base-gap;
-  max-width:80%;
+  max-width:450px;
+  width: 100%;
   background: #fff;
   margin: auto;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
 }
 
 .help-text {
@@ -122,11 +122,17 @@ input:focus + [role="tooltip"] {
   background: pink;
 }
 
-#status {
+.form-message {
   padding: 2*$base-gap;
   margin-bottom:$base-gap;
-  background: #5B7751;
-  color: #fff;
+}
+
+.form-message--error {
+  background: red;
+}
+
+.form-message--success {
+  background: green;
 }
 
 .btn {

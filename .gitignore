@@ -3,3 +3,4 @@ dist
 .env
 bundle.js
 package-lock.json
+workspace.xml
