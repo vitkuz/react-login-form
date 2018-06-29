@@ -55,62 +55,24 @@ class FormElement extends Component {
       placeholder,
       className,
       required,
+      ['aria-invalid']:isInvalid
     };
     
-    if (isInvalid) {
-      inputOptions['aria-invalid'] = true;
-    }
-    
-    switch (this.props.type) {
-      case 'text':
-        return (
-          <fieldset>
-            {labelVisualHidden ?
+  
+    return (
+        <fieldset>
+          {labelVisualHidden ?
               <label forhtml={id} className="visuallyhidden">{labelText}</label> :
               <label forhtml={id}>{labelText}</label>}
-            <input {...inputOptions}
-                   value={this.state.inputValue}
-                   onChange={this.handleInputChange}
-                   aria-describedby={`${id}-tip`}
-                   ref={this.textInput}/>
-            {this.state.inputValue.length > 0 && <a href="#" className="input-reset-link" arial-label="Click to reset input value" onClick={this.handleInputReset}>*</a>}
-            { helpText && <div role="tooltip" id={`${id}-tip`} className="help-text">{helpText}</div> }
-          </fieldset>
-        );
-        break;
-      case 'password':
-        return (
-          <fieldset>
-            {labelVisualHidden ? <label forhtml={id} className="visuallyhidden">{labelText}</label> :
-              <label forhtml={id}>{labelText}</label>}
-            <input {...inputOptions}
-                   value={this.state.inputValue}
-                   onChange={this.handleInputChange}
-                   aria-describedby={`${id}-tip`}
-                   ref={this.textInput}/>
-            { helpText && <div role="tooltip" id={`${id}-tip`} className="help-text">{helpText}</div> }
-          </fieldset>
-        );
-        break;
-      case 'email':
-        return (
-          <fieldset>
-            <label htmlFor={this.props.id}>{labelText}</label>
-            <input {...inputOptions} value={this.state.inputValue} onChange={this.handleInputChange}/>
-            { helpText && <p className="help-text">{helpText}</p> }
-          </fieldset>
-        );
-        break;
-      default:
-        return (
-          <fieldset>
-            <label htmlFor={this.props.id}>{labelText}</label>
-            <input {...inputOptions} value={this.state.inputValue} onChange={this.handleInputChange}/>
-            { helpText && <p className="help-text">{helpText}</p> }
-          </fieldset>
-        )
-    }
-    
+          <input {...inputOptions}
+                 value={this.state.inputValue}
+                 onChange={this.handleInputChange}
+                 aria-describedby={`${id}-tip`}
+                 ref={this.textInput}/>
+          {this.state.inputValue.length > 0 && <a href="#" className="input-reset-link" arial-label="Click to reset input value" onClick={this.handleInputReset}>*</a>}
+          { helpText && <div role="tooltip" id={`${id}-tip`} className="help-text">{helpText}</div> }
+        </fieldset>
+    );
   }
   
 }

@@ -2,15 +2,11 @@
   "name": "learn_react_001",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"webpack\" \"nodemon ./src/server/app.js\"",
     "test": "jest --watch",
-    "dev": "babel ./src/front/app.js --out-file=public/app.js --presets=env,react",
-    "dev-w": "babel ./src/front/app2.js --out-file=public/app2.js --presets=env,react --watch",
-    "playground": "babel ./src/front/playground/redux-101.js --out-file=public/redux-101.js --presets=env,react --watch",
     "build": "webpack",
     "build-w": "webpack --watch",
     "dev-server": "webpack-dev-server",
-    "custom-server": "nodemon ./src/server/app.js"
+    "custom-server": "nodemon ./src/server/login-server.js"
   },
   "author": "",
   "license": "ISC",
