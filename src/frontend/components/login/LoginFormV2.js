@@ -2,45 +2,66 @@ import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 
 
-import FormElement from './FormElement';
+import FormElement from './FormElementV2';
 import FormMessage from './FormMessage';
 
 import { alertActions } from '../../actions/alerts.actions';
-
-
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggingIn:false,
-      form: {
-        username: '',
-        password: '',
-        submitted: false,
-      },
-      validation: {
-        fields: {
-          username: {
-            isInvalid: false
-          },
-          password: {
-            isInvalid: false
-          }
+      messages: [],
+      fields: {
+        username:{
+          value:'',
+          isInvalid:false,
+          validationRule: /\.*/
         },
-      },
-      errorsMessage: []
+        password: {
+          value:'',
+          isInvalid:false,
+          validationRule: /\.*/
+        }
+      }
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.updateFormState = this.updateFormState.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputReset = this.handleInputReset.bind(this);
   }
   
-  updateFormState(e) {
-    const {name, value} = e.target;
-    this.state.form[name] = value;
-    // this.setState({
-    //   [name]:value
-    // });
+  handleInputChange(e) {
+    const { name, value, id } = e.target;
+    console.log(name, value);
+    this.setState((prevState) => {
+      return {
+        fields: {
+            ...prevState.fields,
+          [name]: {
+            value
+          }
+        }
+      }
+    })
+  }
+  
+  handleInputReset(e,input) {
+    console.log(e.target);
+    console.log(input);
+    console.log(this);
+  
+    this.setState((prevState) => {
+      return {
+        fields: {
+          ...prevState.fields,
+          [input.props.name]: {
+            value:''
+          }
+        }
+      }
+    });
+    
+    input.focus();
   }
   
   validateForm(username, password) {
@@ -91,10 +112,6 @@ class LoginForm extends Component {
     });
     
     if (formValidation.errorsMessage.length === 0) {
-      
-      console.log(formValidation);
-  
-      console.log(username, password);
   
       fetch('http://localhost:3000/api/login', {
         method: 'POST',
@@ -146,19 +163,14 @@ class LoginForm extends Component {
   render() {
     
     const { formTitle, loggingIn } = this.props;
-    const { username, password } = this.state.validation.fields;
+    const { username, password } = this.state.fields;
+    
+    console.log(this.state.fields);
     
     return (
         <Fragment>
           { formTitle && <h1 className="component-title">{ formTitle }</h1> }
           <div className="component-content">
-            
-            {
-              this.state.errorsMessage.length > 0 && this.state.errorsMessage.map((msg,i) => {
-                console.log(msg);
-                return <FormMessage key={i} {...msg} />;
-              })
-            }
             
             <form action="/" aria-label="Login form" className="login-form" onSubmit={this.handleFormSubmit}>
               <FormElement
@@ -169,11 +181,13 @@ class LoginForm extends Component {
                   placeholder="Username or email"
                   labelText="Enter username or email"
                   helpText="Please enter valid username or email"
+                  value={username.value}
                   autofocus={true}
                   required={false}
                   labelVisualHidden={true}
                   isInvalid={username.isInvalid}
-                  updateFormState={this.updateFormState}
+                  handleInputReset={this.handleInputReset}
+                  handleInputChange={this.handleInputChange}
               />
               <FormElement
                   type="password"
@@ -183,12 +197,12 @@ class LoginForm extends Component {
                   placeholder="You best password"
                   labelText="Enter password"
                   helpText="Please enter valid password"
+                  value={password.value}
                   required={false}
                   labelVisualHidden={true}
                   isInvalid={password.isInvalid}
+                  handleInputReset={this.handleInputReset}
                   handleInputChange={this.handleInputChange}
-                  inputValue={this.state.form.password}
-                  updateFormState={this.updateFormState}
               />
               <button className="btn btn-success">
                 Click

@@ -7,18 +7,22 @@
     "build": "webpack",
     "build-w": "webpack --watch",
     "dev-server": "webpack-dev-server",
-    "custom-server": "nodemon ./src/server/login-server.js"
+    "custom-server": "nodemon ./src/server/login-server.js --ignore 'sessions/*.json' "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "concurrently": "^3.6.0",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-modal": "^3.4.5",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
+    "session-file-store": "^1.2.0",
     "uuid": "^3.2.1",
     "webpack": "^4.12.0",
     "webpack-dev-server": "^3.1.4"

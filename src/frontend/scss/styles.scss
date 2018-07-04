@@ -156,3 +156,13 @@ input:focus + [role="tooltip"] {
 a.active {
   color: red;
 }
+
+.alert {
+  background: red;
+  color: #fff;
+}
+
+.alert-success {
+  background: green;
+  color: #fff;
+}

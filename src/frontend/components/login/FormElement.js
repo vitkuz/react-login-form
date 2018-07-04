@@ -4,7 +4,7 @@ class FormElement extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
+      value: '',
       errorMessage: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -14,10 +14,13 @@ class FormElement extends Component {
   
   handleInputChange(e) {
     console.log(e.target.value);
-    const inputValue = e.target.value;
+    const {name, value} = e.target;
+  
+    this.props.updateFormState(e);
+    
     this.setState(() => {
       return {
-        inputValue
+        value:value
       }
     })
   }
@@ -25,7 +28,7 @@ class FormElement extends Component {
   handleInputReset(e) {
     this.setState(() => {
       return {
-        inputValue:''
+        value:''
       }
     })
     this.focus();
@@ -36,14 +39,16 @@ class FormElement extends Component {
   }
   
   componentDidMount() {
-    console.log(`Component "${this.props.name}" did mount`)
+    console.log(`Component "${this.props.name}" did mount`);
     if (this.props.autofocus) {
-      console.log('focus')
+      console.log('focus');
       this.focus();
     }
   }
   
   render() {
+    
+    console.log('render');
     
     const {labelText, helpText, labelVisualHidden, isInvalid} = this.props;
     const {id, type, name, placeholder, className, required} = this.props;
@@ -65,11 +70,11 @@ class FormElement extends Component {
               <label forhtml={id} className="visuallyhidden">{labelText}</label> :
               <label forhtml={id}>{labelText}</label>}
           <input {...inputOptions}
-                 value={this.state.inputValue}
+                 value={this.state.value}
                  onChange={this.handleInputChange}
                  aria-describedby={`${id}-tip`}
                  ref={this.textInput}/>
-          {this.state.inputValue.length > 0 && <a href="#" className="input-reset-link" arial-label="Click to reset input value" onClick={this.handleInputReset}>*</a>}
+          {this.state.value.length > 0 && <a href="#" className="input-reset-link" arial-label="Click to reset input value" onClick={this.handleInputReset}>*</a>}
           { helpText && <div role="tooltip" id={`${id}-tip`} className="help-text">{helpText}</div> }
         </fieldset>
     );

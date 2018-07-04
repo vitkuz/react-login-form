@@ -1,29 +1,41 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import { alertActions } from '../actions/alerts.actions';
 
 import AppHeader from '../components/AppHeader';
 import AppFooter from '../components/AppFooter';
 
-import LoginForm from '../components/login/LoginForm';
+import LoginForm from '../components/login/LoginFormV2';
 import LoginFormFooter from '../components/login/LoginFormFooter';
 import LoginForgetPassword from '../components/login/ForgetPasswordForm';
 import RegisterForm from '../components/login/RegisterForm';
 
 
-class AppRoutes extends Component {
-  state = {
-    log:[
-      {}
-    ]
-  };
-  
+class App extends Component {
+  constructor(props) {
+    super(props);
+    const { dispatch } = this.props;
+  }
+  componentWillMount() {
+   
+   const user = localStorage.getItem('user');
+   
+   if (!user) {
+     this.props.dispatch(alertActions.success(`Hello ${this.props.user.name}! Please login!`));
+   } else {
+     this.props.dispatch(alertActions.success(`Hello ${this.props.user.name}! Thanks for coming back!`));
+   }
+  }
   render() {
-    
-    // const classes = `component ${this.props.match.path.split('/').join(' ')}`;
     
     return (
         <BrowserRouter>
           <div className="page-wrapper">
+            {this.props.alert.message &&
+              <div className={`alert ${this.props.alert.type}`}>{this.props.alert.message}</div>
+            }
             <AppHeader title="Try to login" subtitle="Test work for a project"/>
             <main className={`component`}>
               <Switch>
@@ -43,7 +55,16 @@ class AppRoutes extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  const { alert, user, loggingIn } = state;
+  return {
+    alert,
+    user,
+    loggingIn
+  };
+}
 
+const connectedApp = connect(mapStateToProps)(App);
 
+export default connectedApp;
 
-export default AppRoutes;
