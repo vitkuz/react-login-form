@@ -4,3 +4,4 @@ dist
 bundle.js
 package-lock.json
 workspace.xml
+sessions
