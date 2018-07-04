@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 
 import FormElement from './FormElementV2';
-import FormMessage from './FormMessage';
+import { formValidator } from '../../validators/formValidator';
+import { tryLoginUser } from '../../services/login';
 
 import { alertActions } from '../../actions/alerts.actions';
 
@@ -64,99 +65,30 @@ class LoginForm extends Component {
     input.focus();
   }
   
-  validateForm(username, password) {
-    
-    //todo: move to separate file, install https://www.npmjs.com/package/validator
-    
-    const newValidationObject = JSON.parse(JSON.stringify(this.state.validation));
-    
-    if (!username) {
-      newValidationObject.fields.username.isInvalid = true;
-    } else {
-      newValidationObject.fields.username.isInvalid = false;
-    }
-    if (!password) {
-      newValidationObject.fields.password.isInvalid = true;
-    } else {
-      newValidationObject.fields.password.isInvalid = false;
-    }
-    
-    if (password && username) {
-      return {
-        validation: newValidationObject,
-        errorsMessage: []
-      }
-    }
-    
-    return {
-      validation: newValidationObject,
-      errorsMessage: [{type:'error', text:'You have errors in the form'}]
-    }
-  }
-  
   handleFormSubmit(e) {
     e.preventDefault();
     const { dispatch } = this.props;
     
-    //collect values
-    const username = e.target.elements.username.value;
-    const password = e.target.elements.password.value;
-    //validate values
-    const formValidation = this.validateForm(username, password);
-  
-    this.setState(() => {
-      return {
-        validation: formValidation.validation,
-        errorsMessage: [...formValidation.errorsMessage]
-      }
-    });
+    const { username, password } = e.target.elements;
     
-    if (formValidation.errorsMessage.length === 0) {
+    //validate values
   
-      fetch('http://localhost:3000/api/login', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username, password})
-      }).then((response) => {
-        if (response.status === 200) {
-          return response.json()
+    const { error } = formValidator.login(username.value, password.value);
+    
+    if (!error) {
+  
+      tryLoginUser(username.value, password.value).then(response => {
+        console.log('RESPONSE FROM WEB SERVER',response);
+        
+        if (!response.error) {
+          console.log(response);
+          this.props.dispatch(alertActions.success('You\'ve  successfully login'));
         } else {
-          this.setState(() => {
-            return {
-              errorsMessage: [{type:'error', text:'Not valid username o password'}]
-            }
-          });
-          throw new Error('Permission denied');
+          this.props.dispatch(alertActions.error('Try again!'));
         }
-      }).then((json) => {
         
-            this.setState({
-              errorsMessage: [{type:'success', text:'You were successfully login'}]
-            }, () => {
-              this.props.dispatch(alertActions.success('Successfully log in'));
-              localStorage.setItem('user',JSON.stringify(json));
-            })
-          },
-          (err) => {
-            console.log(err);
-            this.setState(() => {
-              return {
-                errorsMessage: [{type:'error', text:'Incorrect username or password. Use: admin1/123'}]
-              }
-            })
-        
-          }
-      ).catch((e) => {
-        console.log(e.message);
-        this.setState(() => {
-          return {
-            errorsMessage: [{type:'error', text:'Network error. Try later'}]
-          }
-        })
       })
+      
     }
   }
   
