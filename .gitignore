@@ -1,7 +1,9 @@
 node_modules
+coverage
 dist
 .env
+.idea
 bundle.js
 package-lock.json
-workspace.xml
 sessions
+*.log

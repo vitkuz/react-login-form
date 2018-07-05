@@ -13,8 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
     "concurrently": "^3.6.0",
     "express-session": "^1.15.6",
+    "helmet": "^3.12.1",
+    "mongoose": "^5.2.1",
     "morgan": "^1.9.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -25,21 +28,23 @@
     "session-file-store": "^1.2.0",
     "uuid": "^3.2.1",
     "webpack": "^4.12.0",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.4",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "nodemon": "^1.17.5",
-    "webpack-cli": "^3.0.8",
-    "css-loader": "^0.28.11",
-    "node-sass": "^4.9.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "jest": "^23.3.0",
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5",
     "sass-loader": "^7.0.3",
-    "style-loader": "^0.21.0"
+    "style-loader": "^0.21.0",
+    "webpack-cli": "^3.0.8"
   }
 }
