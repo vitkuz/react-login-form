@@ -8,6 +8,8 @@ require('./startup/db')();
 // const p = Promise.reject(new Error('Promise was rejected'));
 // p.then((result) => console.log('DONE'));
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, function () {
+  console.log(`Example app listening on port ${PORT}!`);
 });
