@@ -2,12 +2,16 @@
   "name": "learn_react_001",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"npm run dev-server\" \"npm run custom-server\"",
+    "start": "node src/server/login-server.js",
     "test": "jest --watch",
     "build": "webpack",
     "build-w": "webpack --watch",
     "dev-server": "webpack-dev-server",
     "custom-server": "nodemon ./src/server/login-server.js --ignore 'sessions/*.json' "
+  },
+  "engines": {
+    "node": "8.5.0",
+    "npm": "5.3.0"
   },
   "author": "",
   "license": "ISC",
