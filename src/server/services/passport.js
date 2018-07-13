@@ -20,16 +20,31 @@ passport.use(new GoogleStrategy(config,
   
       console.log(profile.id);
       
-      User.findOne({ googleId: profile.id }, function (err, user) {
-        if(user) {
-          console.log('User found!');
-          return done(err, user);
-        } else {
-          User.create({ googleId: profile.id }, function (err, user) {
-            return done(err, user);
-          });
+      try {
+        const user = await User.findOne({ googleId: profile.id });
+        
+        if (!user) {
+          const user = await User.create({ googleId: profile.id });
         }
-      });
+        
+        return done(null, user);
+        
+      } catch(err) {
+        return done(err, null);
+      }
+  
+      
+      
+      // User.findOne({ googleId: profile.id }, function (err, user) {
+      //   if(user) {
+      //     console.log('User found!');
+      //     return done(err, user);
+      //   } else {
+      //     User.create({ googleId: profile.id }, function (err, user) {
+      //       return done(err, user);
+      //     });
+      //   }
+      // });
       
     }
 ));
